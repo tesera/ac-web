@@ -3,7 +3,7 @@
 'use strict';
 
 angular.module('avalancheCanadaApp')
-    .controller('MapCtrl', function ($rootScope, $scope, $timeout, $state, acForecast, acObservation, obs, auth, $location) {
+    .controller('MapCtrl', function ($rootScope, $scope, $timeout, $templateCache, $state, acForecast, acObservation, obs, auth, $location) {
         angular.extend($scope, {
             current: {},
             drawer: {
@@ -43,6 +43,19 @@ angular.module('avalancheCanadaApp')
 
         acForecast.fetch().then(function (forecasts) {
             $scope.regions = forecasts;
+        });
+
+        $scope.$on('ac.min.obclicked', function (e, obHtml) {
+            var $modal = $('#mobileMapPopup');
+
+            if(!$modal.length){
+                var modalTemplate = $templateCache.get('min-report-popup-modal.html');
+                var $modal = $(modalTemplate);
+                $(document.body).append($modal);
+            }
+
+            $modal.find('.modal-body').html(obHtml);
+            $modal.modal('show');
         });
 
         $scope.$watch('current.region', function (newRegion, oldRegion) {
