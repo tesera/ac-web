@@ -99,10 +99,25 @@ Install Node.js and Ruby then:
 
 ````sh
 $ gem install compass
-$ sudo npm -g install grunt-cli karma bower 
+$ npm -g install grunt-cli karma bower 
 $ npm install
 $ bower install
 $ grunt serve
+````
+
+The follwing environment variables also need to be set on the server:
+
+````
+$cat .env
+AWS_PROFILE=avalanche-canada
+SESSION_SECRET='mysecret'
+AUTH0_CLIENT_ID='client-id'
+AUTH0_CLIENT_SECRET='client-secret'
+NO_CACHE_REFRESH=true
+MINSUB_DYNAMODB_TABLE='mountain-info-network-qa'
+AST_PROVIDER_TABLE='ast-provider-dev'
+AST_COURSE_TABLE='ast-course-dev'
+CLOUDINARY_AUTH='mykey'
 ````
 
 To run jslint to check javascript quality run:
@@ -151,15 +166,4 @@ For production the best practice is to use an ec2 instance profiles and set the 
 }
 ````
 When using elastic beanstalk you can set the instance profile at environment creation using the console, cli or eb tool. You can also change the instance profile using the same tools at a later point.
-
-The follwing environment variables also need to be set on the server:
-````
-SESSION_SECRET=mysessionsecret
-AUTH0_CLIENT_ID=myauth0clientid
-AUTH0_CLIENT_SECRET=myauth0clientsecret
-REDIS_HOST='yourredishost'
-NO_CACHE_REFRESH=true
-MINSUB_DYNAMODB_TABLE='dynamotablename'
-USE_PRERENDER=false
-````
 
