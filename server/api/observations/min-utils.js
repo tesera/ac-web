@@ -10,9 +10,10 @@ var changeCase = require('change-case');
 var logger = require('winston');
 
 var AWS = require('aws-sdk');
-var DOC = require("dynamodb-doc");
+//var DOC = require("dynamodb-doc");
 AWS.config.update({region: 'us-west-2'});
-var docClient = new DOC.DynamoDB();
+//var docClient = new DOC.DynamoDB();
+var docClient = new AWS.DynamoDB.DocumentClient();
 var s3Stream = require('s3-upload-stream')(new AWS.S3());
 
 var OBS_TABLE = process.env.MINSUB_DYNAMODB_TABLE;
@@ -265,10 +266,16 @@ exports.getObservations = function (filters, callback) {
 
     console.log('getting obs between start = %s and end = %s', startDate.format('YYYY-MM-DD'), endDate.format('YYYY-MM-DD'));
 
-    params.KeyConditions = [
-        docClient.Condition("acl", "EQ", "public"),
-        docClient.Condition("epoch", "BETWEEN", startDate.unix(), endDate.unix())
-    ];
+    //params.KeyConditions = [
+    //    docClient.Condition("acl", "EQ", "public"),
+    //    docClient.Condition("epoch", "BETWEEN", startDate.unix(), endDate.unix())
+    //];
+    params.KeyConditionExpression = "acl = :auth and epoch BETWEEN :start AND :end";
+    params.ExpressionAttributeValues= {
+        ':auth': 'public',
+        ':start': startDate.unix(),
+        ':end': endDate.unix()
+    };
 
     docClient.query(params, function(err, res) {
         if (err) {
