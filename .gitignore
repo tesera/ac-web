@@ -13,4 +13,3 @@ aws.json
 dump.rdb
 npm-debug.log
 *.db
-client/app/acComponents
