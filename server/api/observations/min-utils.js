@@ -8,6 +8,8 @@ var moment = require('moment');
 var im = require('imagemagick-stream');
 var changeCase = require('change-case');
 var logger = require('winston');
+var multiparty = require('multiparty');
+var q = require('q');
 
 var AWS = require('aws-sdk');
 //var DOC = require("dynamodb-doc");
@@ -101,6 +103,7 @@ exports.saveSubmission = function (user, form, callback) {
             uploads: []
         }
     };
+    var tempObs = {};
 
     form.on('field', function(name, value) {
         value = value.trim();
@@ -114,6 +117,9 @@ exports.saveSubmission = function (user, form, callback) {
                 case "datetime":
                     item.ob.datetime = value;
                     item.epoch = moment(item.ob.datetime).unix();
+                    break;
+                case "obs":
+                    tempObs = JSON.parse(value);
                     break;
                 default:
                     if(/^\{|^\[/.test(value)) {
@@ -169,27 +175,86 @@ exports.saveSubmission = function (user, form, callback) {
     });
 
     form.on('close', function (err) {
-        var valid = validateItem(item);
 
-        if(valid){
-            docClient.putItem({
-                TableName: OBS_TABLE,
-                Item: item,
-            }, function (err, data) {
-                if (err) {
-                    logger.log('info', JSON.stringify(err));
-                    callback({error: 'error saving you submission: saving'});
-                } else {
-                    logger.log('info','successfully saved item');
-                    var sub =  itemToSubmission(item);
-                    callback(null, sub);
-                }
-            });
+        if(_.isEmpty(tempObs)){
+            saveOb(item)
+                .then(function(ob){
+                    callback(null, ob);
+                }, function (err){
+                    callback(err);
+                });
         } else {
-            callback({error: 'error saving you submission: invalid'});
+            saveAllObs(callback);
+        }
+
+
+        function saveOb(item){
+            var valid = validateItem(item);
+            var defer = q.defer();
+
+            if(valid){
+                console.log(item);
+                docClient.put({
+                    TableName: OBS_TABLE,
+                    Item: item
+                }, function (err, data) {
+                    if (err) {
+                        logger.log('info', JSON.stringify(err));
+                        defer.reject({error: 'error saving you submission: saving'});
+                    } else {
+                        logger.log('info','successfully saved item');
+                        var sub =  itemToSubmission(item);
+                        defer.resolve(sub);
+                    }
+                });
+            } else {
+                defer.reject({error: 'error saving you submission: invalid'});
+            }
+            return defer.promise;
+        }
+
+        function saveAllObs(callback){
+            var obsPromises = [];
+            _.forEach(tempObs, function (ob, key){
+                var itemClone = _.cloneDeep(item);
+                itemClone.obid = uuid.v4();
+                itemClone.obtype = key.replace('Report','');
+                _.assign(itemClone.ob, ob);
+
+                var p = saveOb(itemClone);
+
+                obsPromises.push(p);
+            });
+
+            q.all(obsPromises)
+                .then(function (results){
+                    callback(null, results[0]);
+                }, function (err){
+                    callback(err);
+                });
         }
 
     });
+};
+
+exports.saveWebSubmission = function (user, data, callback){
+    var form = new multiparty.Form();
+    form.parse(data, function (err, fields, files){
+
+        callback(null, {fields: fields, files: files});
+    });
+
+    var uploadDate = moment().format('YYYY/MM/DD/');
+    var item = {
+        subid: uuid.v4(),
+        userid: user.user_id,
+        user: user.nickname || 'unknown',
+        acl: 'public',
+        ob: {
+            uploads: []
+        }
+    };
+
 };
 
 exports.getSubmissions = function (filters, callback) {
@@ -239,7 +304,7 @@ exports.getSubmission = function (subid, callback) {
         if (err) {
             callback({error: "error fetching observations"});
         } else {
-            var sub = itemToSubmission(res.Items[0]);
+            var sub = itemsToSubmissions(res.Items);
             callback(null, sub);
         }
     });
