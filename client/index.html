@@ -25,7 +25,8 @@
     <link rel="shortcut icon" type="image/png" href="http://avalanche.ca/assets/Avalanche_Canada_logo32x32.png" />
     <link rel="apple-itouch-icon" href="http://avalanche.ca/assets/Avalanche_Canada_logo32x32.png" >
 
-
+      <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+      <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
     <!-- generated -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
@@ -86,8 +87,8 @@
       <script src="bower_components/multilevelpushmenu/jquery.multilevelpushmenu.js"></script>
       <script src="bower_components/mapbox.js/mapbox.js"></script>
       <script src="bower_components/leaflet-pip/leaflet-pip.js"></script>
-      <script src="bower_components/leaflet.locatecontrol/src/L.Control.Locate.js"></script>
       <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+      <script src="bower_components/leaflet.locatecontrol/src/L.Control.Locate.js"></script>
       <script src="bower_components/ac-components/dist/ac-components.js"></script>
       <script src="bower_components/angular-prismicio/dist/angular-prismicio.min.js"></script>
       <script src="bower_components/a0-angular-storage/dist/angular-storage.js"></script>
@@ -115,6 +116,7 @@
       <script src="bower_components/prismic.io/dist/prismic.io.js"></script>
       <script src="assets/js/geojson-utils.js"></script>
     <!-- endbuild -->
+    <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 
     <!-- some of the i18n modules in the lock.js lib break the set build process, package seperatly. -->
     <script src="bower_components/auth0-lock/build/auth0-lock.min.js"></script>
