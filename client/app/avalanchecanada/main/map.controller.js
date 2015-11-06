@@ -3,7 +3,7 @@
 'use strict';
 
 angular.module('avalancheCanadaApp')
-    .controller('MapCtrl', function ($rootScope, $scope, $timeout, $state, Prismic, acForecast, acObservation, obs, auth, $location) {
+    .controller('MapCtrl', function ($rootScope, $scope, $timeout, $state, Prismic, acForecast, acObservation, obs, auth) {
 
         Prismic.ctx().then(function(ctx){
 
@@ -37,7 +37,8 @@ angular.module('avalancheCanadaApp')
                 enabled: true
             },
             filters: {
-                obsPeriod: '7-days'
+                obsPeriod: '7-days',
+                minFilters: ['avalanche', 'quick', 'snowpack', 'incident', 'weather']
             },
             regionsVisible: true
         });
@@ -89,6 +90,16 @@ angular.module('avalancheCanadaApp')
         });
 
         $scope.dateFilters = ['7-days','1-days','3-days', '14-days', '30-days'];
+        $scope.minFilters = ['avalanche', 'quick', 'snowpack', 'incident', 'weather'];
+
+        $scope.getMinFilters = function(type){
+            if(_.indexOf($scope.filters.minFilters, type) !== -1){
+                return true;
+            } else {
+                return false;
+            }
+        };
+
         $scope.toggleFilter = function (filter) {
             if(filter){
                 var filterType = filter.split(':')[0];
@@ -108,6 +119,12 @@ angular.module('avalancheCanadaApp')
                         $scope.dateFilters.unshift(filterValue);
                         $scope.expanded = false;
                     }, 0);
+                } else {
+                    if(_.indexOf($scope.filters.minFilters, filterValue) !== -1){
+                        $scope.filters.minFilters = _.without($scope.filters.minFilters, filterValue);
+                    } else {
+                        $scope.filters.minFilters.push(filterValue);
+                    }
                 }
 
             } else {

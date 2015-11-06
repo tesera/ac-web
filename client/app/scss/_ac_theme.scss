@@ -40,3 +40,13 @@
     padding-left: 6px;
     padding-top: 2px;
 }
+
+.marker-cluster{
+    background-color: transparent!important;
+}
+
+div[class^='marker-cluster-'] div,
+div[class*=' marker-cluster-'] div{
+    color: #ffffff;
+    background-color: #4B6D6F!important;
+}
