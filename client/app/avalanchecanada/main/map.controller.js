@@ -3,7 +3,7 @@
 'use strict';
 
 angular.module('avalancheCanadaApp')
-    .controller('MapCtrl', function ($rootScope, $scope, $timeout, $state, Prismic, acForecast, acObservation, obs, auth) {
+    .controller('MapCtrl', function ($rootScope, $scope, $timeout, $state, Prismic, acForecast, acObservation, obs, auth, $location) {
 
         Prismic.ctx().then(function(ctx){
 
@@ -33,15 +33,28 @@ angular.module('avalancheCanadaApp')
         angular.extend($scope, {
             current: {},
             drawer: {
-                visible: false,
-                enabled: true
+                left: {
+                    visible: false
+                },
+                right:{
+                    visible: false,
+                    enabled: true
+                }
             },
             filters: {
                 obsPeriod: '7-days',
                 minFilters: ['avalanche', 'quick', 'snowpack', 'incident', 'weather']
             },
-            regionsVisible: true
+            regionsVisible: true,
+            expandedDate: false,
+            dateFilters : ['7-days','1-days','3-days', '14-days', '30-days'],
+            minFilters : ['all min','avalanche', 'quick', 'snowpack', 'incident', 'weather'],
+            toggleForecast: toggleForecast,
+            goToSubmitReport: goToSubmitReport,
+            toggleDateFilters: toggleDateFilters
         });
+
+        var displayedMinFilters = ['all min'];
 
         if($state.current.data && $state.current.data.isLogin) {
             if(!auth.isAuthenticated) {
@@ -72,9 +85,17 @@ angular.module('avalancheCanadaApp')
             $scope.regions = forecasts;
         });
 
+        $scope.$watch('current.report', function(newValue, oldValue){
+            if(newValue && newValue !== oldValue) {
+                $scope.drawer.left.visible = true;
+            } else {
+                $scope.drawer.left.visible = false;
+            }
+        });
+
         $scope.$watch('current.region', function (newRegion, oldRegion) {
             if(newRegion && newRegion !== oldRegion) {
-                $scope.drawer.visible = false;
+                $scope.drawer.right.visible = false;
                 $scope.imageLoaded = false;
 
                 if(!newRegion.feature.properties.forecast) {
@@ -84,16 +105,13 @@ angular.module('avalancheCanadaApp')
                 }
 
                 $timeout(function () {
-                    $scope.drawer.visible = true;
+                    $scope.drawer.right.visible = true;
                 }, 800);
             }
         });
 
-        $scope.dateFilters = ['7-days','1-days','3-days', '14-days', '30-days'];
-        $scope.minFilters = ['avalanche', 'quick', 'snowpack', 'incident', 'weather'];
-
         $scope.getMinFilters = function(type){
-            if(_.indexOf($scope.filters.minFilters, type) !== -1){
+            if(_.indexOf(displayedMinFilters, type) !== -1){
                 return true;
             } else {
                 return false;
@@ -117,14 +135,12 @@ angular.module('avalancheCanadaApp')
                         var i = $scope.dateFilters.indexOf(filterValue);
                         $scope.dateFilters.splice(i, 1);
                         $scope.dateFilters.unshift(filterValue);
-                        $scope.expanded = false;
+                        toggleDateFilters();
                     }, 0);
-                } else {
-                    if(_.indexOf($scope.filters.minFilters, filterValue) !== -1){
-                        $scope.filters.minFilters = _.without($scope.filters.minFilters, filterValue);
-                    } else {
-                        $scope.filters.minFilters.push(filterValue);
-                    }
+                }
+
+                if (filterType === 'minFilter' && $scope.filters[filterType] !== filterValue){
+                   toggleMinFilters(filterValue);
                 }
 
             } else {
@@ -136,4 +152,51 @@ angular.module('avalancheCanadaApp')
                 }
             }
         };
+
+        function goToSubmitReport(){
+            $location.path('/submit');
+        }
+
+        function toggleForecast(){
+            $scope.drawer.right.enabled = !$scope.drawer.right.enabled;
+            $scope.regionsVisible = !$scope.regionsVisible;
+        }
+
+        function toggleMinFilters(filterValue){
+            var previousMinFilter = displayedMinFilters[0];
+
+            if( previousMinFilter === 'all min'){
+                cleanMinFilters();
+            }
+
+            if (filterValue === 'all min'){
+                if (previousMinFilter === 'all min'){
+                    cleanMinFilters();
+                } else{
+                    setAllMinFilters();
+                }
+
+            } else {
+                if(_.indexOf($scope.filters.minFilters, filterValue) !== -1){
+                    $scope.filters.minFilters = _.without($scope.filters.minFilters, filterValue);
+                } else {
+                    $scope.filters.minFilters.push(filterValue);
+                }
+                displayedMinFilters = $scope.filters.minFilters;
+            }
+
+            function cleanMinFilters(){
+                displayedMinFilters = [];
+                $scope.filters.minFilters = [];
+            }
+
+            function setAllMinFilters(){
+                displayedMinFilters = ['all min'];
+                $scope.filters.minFilters = ['avalanche', 'quick', 'snowpack', 'incident', 'weather'];
+            }
+        }
+
+        function toggleDateFilters(){
+            $scope.expandedDate = !$scope.expandedDate;
+        }
     });
