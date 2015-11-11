@@ -107,11 +107,11 @@
                 }
                 span {
                     color: #A7BFDE;
-                    font-size: 0.7em;
+                    font-size: 0.6em;
                     font-weight: bold;
                     position: relative;
                     top: -25px;
-                    left: 5px;
+                    left: 9px;
                 }
                 polygon {
                     fill: #A7BFDE;
@@ -134,12 +134,19 @@
 
     .ac-filters ul {
         position: relative;
-        width: 500px;
+        user-select: none;
+        width: 60px;
+        &.opened {
+            width: 440px;
+        }
 
-
+        .ng-leave{
+            display: none!important;
+        }
 
         li {
             color: #A7BFDE;
+            margin-left: 1px;
             i {
                 padding-top: 7px;
                 padding-left: 13px;
