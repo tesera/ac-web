@@ -12,9 +12,9 @@
     width: 100%;
     right: -100%;
     margin-bottom: 0;
-    background-color: rgb(255, 255, 255);
+    background-color: $white;
     box-shadow: -5px 0 15px rgba(43, 47, 51, 0.6);
-    border-top: 1px solid #eee;
+    border-top: 1px solid $main-gray--10;
     transition: all 0.3s linear;
     z-index: 1000;
     &-right {
@@ -56,7 +56,7 @@
         position: absolute;
         top: 10px;
         right: 10px;
-        color: #55595C;
+        color: $main-gray--80;
         cursor: pointer;
         z-index: 10;
     }
@@ -79,7 +79,7 @@
             height: 60px;
             width: 60px;
             margin-bottom: 10px;
-            background-color: #245EAC;
+            background-color: $main-blue;
             cursor: pointer;
             transition: all 0.2s linear;
             small, strong {
@@ -93,12 +93,12 @@
                 padding-top: 3px;
             }
             i {
-                color: #A7BFDE;
+                color: $main-blue--light;
             }
             &.on {
-                color: #ffffff;
+                color: $white;
                 i {
-                    color: #ffffff;
+                    color: $white;
                 }
             }
             .danger-icon {
@@ -106,7 +106,7 @@
                     margin-top:-3px;
                 }
                 span {
-                    color: #A7BFDE;
+                    color: $main-blue--light;
                     font-size: 0.6em;
                     font-weight: bold;
                     position: relative;
@@ -114,16 +114,16 @@
                     left: 9px;
                 }
                 polygon {
-                    fill: #A7BFDE;
+                    fill: $main-blue--light;
                 }
             }
             &.on {
                 .danger-icon {
                     span {
-                        color: #ffffff;
+                        color: $white;
                     }
                     polygon {
-                        fill: #ffffff;
+                        fill: $white;
                     }
                 }
             }
@@ -145,7 +145,7 @@
         }
 
         li {
-            color: #A7BFDE;
+            color: $main-blue--light;
             margin-left: 1px;
             i {
                 padding-top: 7px;
@@ -162,46 +162,46 @@
     }
     .ac-min-filters{
         ul li{
-            background-color: #ffffff;
-            color: #55595C;
+            background-color: $white;
+            color: $main-gray--80;
             i {
-                color: #A7BFDE;
+                color: $main-blue--light;
                 padding-left: 16px;
             }
             &.on {
-                color: #ffffff;
-                background-color: #245EAC;
+                color: $white;
+                background-color: $main-blue;
                 i {
-                    color: #ffffff;
+                    color: $white;
                 }
             }
             &.ac-minfilter-button{
-                background-color: #245EAC;
-                color: #ffffff;
+                background-color: $main-blue;
+                color: $white;
                 i {
-                    color: #ffffff;
+                    color: $white;
                     padding-left: 16px;
                 }
             }
         }
         .report{
             &-quick{
-                color: #85C974!important;
+                color: $report-quick!important;
             }
             &-avalanche{
-                color: #83B8D3!important;
+                color: $report-avalanche!important;
             }
             &-incident{
-                color: #FF5252!important;
+                color: $report-incident!important;
             }
             &-snowpack{
-                color: #3E8C8D!important;
+                color: $report-snowpack!important;
             }
             &-weather{
-                color: #FFAB40!important;
+                color: $report-weather!important;
             }
             &-all{
-                color: #4B6D6F!important;
+                color: $report-cluster!important;
             }
 
         }
@@ -216,7 +216,7 @@
             position: absolute;
             top: 4px;
             left: 6px;
-            background-color: #245EAC;
+            background-color: $main-blue;
             padding: 3px;
             border-radius: 50%;
         }
