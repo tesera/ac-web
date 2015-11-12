@@ -86,6 +86,7 @@ angular.module('avalancheCanadaApp')
         });
 
         $scope.$watch('current.report', function(newValue, oldValue){
+            console.log(newValue);
             if(newValue && newValue !== oldValue) {
                 $scope.drawer.left.visible = true;
             } else {
