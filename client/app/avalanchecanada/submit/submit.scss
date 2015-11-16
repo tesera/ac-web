@@ -1,8 +1,18 @@
 .min-form {
     .required-info {
-        border: 4px solid #B43A7E;
-        background-color: #F9EFF5;
+        background-color: #FFD740;
         padding: 0 7.5px;
+
+        .required-info-data {
+            background-color: #FFFFFF;
+            padding: 0 7.5px;
+            padding-top: 7.5px;
+            margin-bottom: 7.5px;
+
+            .form-group:nth-child(3) {
+                margin-bottom: 7.5px;
+            }
+        }
     }
 
     .no-padding {
@@ -32,6 +42,7 @@
 
     .form-subtitle {
         font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
+        margin-top: 7.5px;
     }
 
     .announcement {
@@ -158,5 +169,25 @@
         font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
         font-weight: bold;
         font-size: 21px;
+    }
+}
+
+.map-modal {
+    .modal-dialog {
+        height: 80%;
+    }
+
+    .modal-content {
+        height: 100%;
+    }
+
+    .modal-body {
+        height: 100%;
+    }
+
+    .save-button {
+        position: absolute;
+        right: 0;
+        z-index: 9999;
     }
 }
