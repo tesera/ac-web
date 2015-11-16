@@ -1,0 +1,59 @@
+.ac-observation-drawer {
+    h3 {
+        font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
+    }
+
+    .close-drawer {
+        cursor: pointer;
+        margin-right: 20px;
+        font-size: 1.2em;
+        color: $main-gray;
+    }
+
+    .section-label {
+        color: $main-gray--40;
+        span {
+            font-size: 0.8em;
+            text-transform: uppercase;
+            font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            padding-left: 5px;
+        }
+
+    }
+
+    .submission-header {
+        p {
+            padding-left: 15px;
+            margin-bottom: 0px;
+            span {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .upload-n-share{
+        .section-label{
+            margin-bottom: 5px;
+        }
+        .row{
+            margin-bottom: 15px;
+        }
+        .fa-twitter{
+            color: $color-twitter;
+        }
+        .fa-facebook{
+            color: $color-facebook;
+        }
+        .fa-google-plus{
+            color: $color-gplus;
+        }
+    }
+
+    .submission-details{
+        .section-label{
+            margin-bottom: 10px;
+        }
+    }
+
+}

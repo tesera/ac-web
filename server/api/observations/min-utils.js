@@ -12,10 +12,8 @@ var multiparty = require('multiparty');
 var q = require('q');
 
 var AWS = require('aws-sdk');
-//var DOC = require("dynamodb-doc");
 AWS.config.update({region: 'us-west-2'});
-//var docClient = new DOC.DynamoDB();
-var docClient = new AWS.DynamoDB.DocumentClient();
+var dynamodb = new AWS.DynamoDB.DocumentClient();
 var s3Stream = require('s3-upload-stream')(new AWS.S3());
 
 var OBS_TABLE = process.env.MINSUB_DYNAMODB_TABLE;
@@ -193,8 +191,7 @@ exports.saveSubmission = function (user, form, callback) {
             var defer = q.defer();
 
             if(valid){
-                console.log(item);
-                docClient.put({
+                dynamodb.put({
                     TableName: OBS_TABLE,
                     Item: item
                 }, function (err, data) {
@@ -237,26 +234,6 @@ exports.saveSubmission = function (user, form, callback) {
     });
 };
 
-exports.saveWebSubmission = function (user, data, callback){
-    var form = new multiparty.Form();
-    form.parse(data, function (err, fields, files){
-
-        callback(null, {fields: fields, files: files});
-    });
-
-    var uploadDate = moment().format('YYYY/MM/DD/');
-    var item = {
-        subid: uuid.v4(),
-        userid: user.user_id,
-        user: user.nickname || 'unknown',
-        acl: 'public',
-        ob: {
-            uploads: []
-        }
-    };
-
-};
-
 exports.getSubmissions = function (filters, callback) {
     var params = {
         TableName: OBS_TABLE,
@@ -278,12 +255,14 @@ exports.getSubmissions = function (filters, callback) {
 
     console.log('getting obs between start = %s and end = %s', startDate.format('YYYY-MM-DD'), endDate.format('YYYY-MM-DD'));
 
-    params.KeyConditions = [
-        docClient.Condition("acl", "EQ", "public"),
-        docClient.Condition("epoch", "BETWEEN", startDate.unix(), endDate.unix())
-    ];
+    params.KeyConditionExpression = "acl = :auth and epoch BETWEEN :start AND :end";
+    params.ExpressionAttributeValues= {
+        ':auth': 'public',
+        ':start': startDate.unix(),
+        ':end': endDate.unix()
+    };
 
-    docClient.query(params, function(err, res) {
+    dynamodb.query(params, function(err, res) {
         if (err) {
             callback({error: "error fetching observations"});
         } else {
@@ -293,19 +272,18 @@ exports.getSubmissions = function (filters, callback) {
     });
 };
 
-exports.getSubmission = function (subid, callback) {
+exports.getSubmission = function (subid, client, callback) {
     var params = {
         TableName: OBS_TABLE,
         FilterExpression: 'attribute_exists(obid) and subid = :subid',
         ExpressionAttributeValues: {':subid' : subid}
     };
 
-    docClient.scan(params, function(err, res) {
+    dynamodb.scan(params, function(err, res) {
         if (err) {
             callback({error: "error fetching observations"});
         } else {
-            var sub = itemsToSubmissions(res.Items);
-            callback(null, sub);
+            callback(null, routeResponseForClient(res.Items, client, 'submissions'));
         }
     });
 };
@@ -331,10 +309,6 @@ exports.getObservations = function (filters, callback) {
 
     console.log('getting obs between start = %s and end = %s', startDate.format('YYYY-MM-DD'), endDate.format('YYYY-MM-DD'));
 
-    //params.KeyConditions = [
-    //    docClient.Condition("acl", "EQ", "public"),
-    //    docClient.Condition("epoch", "BETWEEN", startDate.unix(), endDate.unix())
-    //];
     params.KeyConditionExpression = "acl = :auth and epoch BETWEEN :start AND :end";
     params.ExpressionAttributeValues= {
         ':auth': 'public',
@@ -342,12 +316,11 @@ exports.getObservations = function (filters, callback) {
         ':end': endDate.unix()
     };
 
-    docClient.query(params, function(err, res) {
+    dynamodb.query(params, function(err, res) {
         if (err) {
             callback({error: "error fetching observations"});
         } else {
-            var subs = itemsToObservations(res.Items);
-            callback(null, subs);
+            callback(null, routeResponseForClient(res.Items, filters.client, 'observations'));
         }
     });
 };
@@ -358,7 +331,7 @@ exports.getObservation = function (obid, callback) {
         FilterExpression: 'obid = :obid',
         ExpressionAttributeValues: {':obid' : obid}
     };
-    docClient.scan(params, function(err, res) {
+    dynamodb.scan(params, function(err, res) {
         if (err) {
             callback({error: "error fetching observations"});
         } else {
@@ -384,3 +357,77 @@ exports.getUploadAsStream = function (key, size) {
         return stream.pipe(resize);
     }
 };
+
+function routeResponseForClient(results, client, type){
+    //if client, then is request from web
+    if (client){
+        if (type && type === 'observations') {
+            return mapWebObsResults(results);
+        } else {
+            return mapWebSubResults(results);
+        }
+    } else {
+        if (type && type === 'observations'){
+            return itemsToObservations(_.filter(results, { obtype:'quick'}));
+        } else {
+            return itemsToSubmissions(results);
+        }
+    }
+}
+
+function mapWebObsResults(results){
+    return _.map(results, function (item) {
+        var ob = _.cloneDeep(item.ob);
+        delete ob.title;
+        delete ob.datetime;
+        delete ob.latlng;
+        delete ob.uploads;
+
+        return {
+            subid: item.subid,
+            obid: item.obid,
+            title: item.ob.title,
+            datetime: item.ob.datetime,
+            user: item.user,
+            obtype: item.obtype,
+            latlng: item.ob.latlng,
+            uploads: item.ob.uploads,
+            ob: ob
+        }
+    });
+}
+
+function mapWebSubResults(items){
+    var subs = _.chain(items)
+        .groupBy('subid')
+        .map(function (obs, subid) {
+            var meta = {
+                subid: subid,
+                latlng: obs[0].ob.latlng,
+                datetime: obs[0].ob.datetime,
+                uploads: obs[0].ob.uploads,
+                user: obs[0].user,
+                title: obs[0].ob.title
+            };
+
+            var obs = obs.map(function (ob) {
+                delete ob.ob.title;
+                delete ob.ob.datetime;
+                delete ob.ob.latlng;
+                delete ob.ob.uploads;
+                return {
+                    obtype: ob.obtype,
+                    obid: ob.obid,
+                    shareUrl: 'http://avalanche.ca/share/' + changeCase.paramCase(meta.title) + '/' + ob.obid,
+                    ob: ob.ob
+                };
+            });
+
+            meta.obs = obs;
+
+            return meta;
+        })
+        .value();
+
+    return subs;
+}
