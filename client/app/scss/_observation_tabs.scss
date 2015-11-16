@@ -52,3 +52,22 @@
         }
     }
 }
+
+.observation-item{
+    margin-bottom: 10px;
+    span.value{
+        color: $main-gray--80;
+        padding-left: 10px;
+        text-transform: none;
+        font-size: 1em;
+        font-weight: normal;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+
+    ul {
+        list-style: none;
+        padding-left:5px;
+        font-size: 1em;
+        color: $main-gray--80;
+    }
+}

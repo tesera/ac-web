@@ -3,7 +3,7 @@
 'use strict';
 
 angular.module('avalancheCanadaApp')
-    .controller('MapCtrl', function ($rootScope, $scope, $timeout, $state, Prismic, acForecast, acObservation, obs, auth, $location) {
+    .controller('MapCtrl', function ($rootScope, $scope, $timeout, $state, Prismic, acForecast, acObservation, obs, auth, $location, acConfig) {
 
         Prismic.ctx().then(function(ctx){
 
@@ -30,6 +30,8 @@ angular.module('avalancheCanadaApp')
 
         });
 
+        var displayedMinFilters = ['all min'];
+
         angular.extend($scope, {
             current: {},
             drawer: {
@@ -43,18 +45,16 @@ angular.module('avalancheCanadaApp')
             },
             filters: {
                 obsPeriod: '7-days',
-                minFilters: ['avalanche', 'quick', 'snowpack', 'incident', 'weather']
+                minFilters: acConfig.minFilters
             },
             regionsVisible: true,
             expandedDate: false,
-            dateFilters : ['7-days','1-days','3-days', '14-days', '30-days'],
-            minFilters : ['all min','avalanche', 'quick', 'snowpack', 'incident', 'weather'],
+            dateFilters :  acConfig.dateFilters,
+            minFilters : displayedMinFilters.concat(acConfig.minFilters),
             toggleForecast: toggleForecast,
             goToSubmitReport: goToSubmitReport,
             toggleDateFilters: toggleDateFilters
         });
-
-        var displayedMinFilters = ['all min'];
 
         if($state.current.data && $state.current.data.isLogin) {
             if(!auth.isAuthenticated) {
@@ -86,7 +86,6 @@ angular.module('avalancheCanadaApp')
         });
 
         $scope.$watch('current.report', function(newValue, oldValue){
-            console.log(newValue);
             if(newValue && newValue !== oldValue) {
                 $scope.drawer.left.visible = true;
             } else {
@@ -193,7 +192,7 @@ angular.module('avalancheCanadaApp')
 
             function setAllMinFilters(){
                 displayedMinFilters = ['all min'];
-                $scope.filters.minFilters = ['avalanche', 'quick', 'snowpack', 'incident', 'weather'];
+                $scope.filters.minFilters = acConfig.minFilters;
             }
         }
 
