@@ -37,7 +37,7 @@ function itemsToSubmissions(items) {
                 return {
                     obtype: ob.obtype,
                     obid: ob.obid,
-                    shareUrl: 'http://avalanche.ca/share/' + changeCase.paramCase(ob.ob.title) + '/' + ob.obid
+                    shareUrl: 'http://avalanche.ca/share/' + changeCase.paramCase(ob.ob.title) + '/' + subid
                 };
             });
 

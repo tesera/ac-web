@@ -27,13 +27,22 @@
 
     .form-left-column {
         padding-left: 0;
-        padding-right: 7.5px;
+        padding-right: 0;
+
+        @media screen and (min-width: $screen-desktop) {
+            padding-right: 7.5px;
+        }
     }
 
     .form-right-column {
-        border-left: 1px solid #f5f5f5;
-        padding-right: 0;
+        padding-right: 15px;
+        padding-left: 15px;
         padding-bottom: 20px;
+
+        @media screen and (min-width: $screen-desktop) {
+            border-left: 1px solid #f5f5f5;
+            padding-right: 0;
+        }
     }
 
     .form-group label small {
@@ -47,28 +56,6 @@
 
     .announcement {
         margin-bottom: 10px;
-    }
-
-    .announcement-left {
-        height: 30px;
-        font-size: 18px;
-        float: left;
-        width: 50px;
-        background-color: #B43A7E;
-        border-radius: 20px;
-        display: table-cell;
-        text-align: center;
-        font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
-        font-variant: small-caps;
-        font-weight: bold;
-        color: #ffffff;
-        margin-top: 3px;
-    }
-
-    .announcement-right {
-        height: 40px;
-        display: table-cell;
-        padding-left: 10px;
     }
 
     .fields-group {
@@ -113,8 +100,10 @@
         }
     }
 
-    .radio.inline + .radio.inline, .checkbox.inline + .checkbox.inline {
-        margin-top: 10px;
+    @media screen and (min-width: $screen-desktop) {
+        .radio.inline + .radio.inline, .checkbox.inline + .checkbox.inline {
+            margin-top: 10px;
+        }
     }
 
     .radio.inline + .radio.inline + .radio.inline, .checkbox.inline + .checkbox.inline + .checkbox.inline {
@@ -122,9 +111,13 @@
     }
 
     .help-text {
-        margin-top: 10px;
-        border-left: 4px solid #AAACAD;
-        padding: 10px;
+        padding: 0;
+
+        @media screen and (min-width: $screen-desktop) {
+            border-left: 4px solid #AAACAD;
+            padding: 10px;
+        }
+
         color: #AAACAD;
         height: 100%;
 
@@ -154,6 +147,18 @@
 
     .error {
         color: #D82631;
+    }
+
+    .tab-text {
+        background-color: #E9EAEA;
+    }
+
+    .submit-btn {
+        float: right;
+    }
+
+    .back-btn {
+        float: left;
     }
 }
 
@@ -190,4 +195,8 @@
         right: 0;
         z-index: 9999;
     }
+}
+
+.form-holder {
+    padding: 0;
 }

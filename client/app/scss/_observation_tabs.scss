@@ -52,6 +52,18 @@
         }
     }
 
+    @media screen and (max-width: $screen-tablet) {
+        li {
+            font-size: 10px;
+            a {
+                width: auto;
+                padding-left: 3px;
+                padding-right: 3px;
+            }
+        }
+    }
+
+
     .tab-head {
         text-transform: uppercase;
     }
