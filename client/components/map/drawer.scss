@@ -32,6 +32,10 @@
     }
 
     &-left {
+        @media (max-width: $screen-sm-min) {
+            width: 100vw;
+            left: -100vw;
+        }
         @media (min-width: $screen-sm-min) {
             width: 350px;
             left: -350px;
