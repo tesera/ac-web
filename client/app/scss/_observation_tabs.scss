@@ -51,23 +51,37 @@
             font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
         }
     }
+
+    .tab-head {
+        text-transform: uppercase;
+    }
 }
 
-.observation-item{
-    margin-bottom: 10px;
-    span.value{
-        color: $main-gray--80;
-        padding-left: 10px;
-        text-transform: none;
-        font-size: 1em;
-        font-weight: normal;
-        font-family: "Helvetica Neue", Arial, sans-serif;
-    }
+.observation-information {
+    margin-bottom: 5px;
 
-    ul {
-        list-style: none;
-        padding-left:5px;
-        font-size: 1em;
-        color: $main-gray--80;
+    .observation-item{
+        i.fa-check{
+            margin-left: 10px;
+            margin-right: 1px;
+            color: $main-gray--80;
+        }
+        span.value{
+            color: $main-gray--80;
+            font-size: 0.8em;
+            font-weight: bolder;
+            font-family: Monserat, Helvetica Neue, Helvetica, Arial, sans-serif;
+            text-transform: uppercase;
+        }
+        ul {
+            display: inline;
+            list-style: none;
+            padding-left:5px;
+            font-size: 1em;
+            color: $main-gray--80;
+            li{
+                display:inline;
+            }
+        }
     }
 }

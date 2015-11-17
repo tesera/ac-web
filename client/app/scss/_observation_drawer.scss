@@ -12,6 +12,8 @@
 
     .section-label {
         color: $main-gray--40;
+        margin-top: 15px;
+        margin-bottom: 3px;
         span {
             font-size: 0.8em;
             text-transform: uppercase;
@@ -33,6 +35,7 @@
     }
 
     .upload-n-share{
+        padding-top: 0px;
         .section-label{
             margin-bottom: 5px;
         }
