@@ -360,7 +360,7 @@ exports.getUploadAsStream = function (key, size) {
 
 function routeResponseForClient(results, client, type){
     //if client, then is request from web
-    if (client){
+    if (client && client === 'web'){
         if (type && type === 'observations') {
             return mapWebObsResults(results);
         } else {

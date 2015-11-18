@@ -27,13 +27,14 @@ angular.module('avalancheCanadaApp')
                 }
             })
             .state('ac.share', {
-                url: '^/share/:title/:obid',
+                url: '^/share/:title/:subid',
                 templateUrl: 'app/avalanchecanada/main/map.html',
                 controller: 'MapCtrl',
                 resolve: {
                   obs: function ($stateParams, $http) {
-                    return $http.get('/api/min/observations/' + $stateParams.obid).then(function (res) {
-                        return [res.data];
+                    var opt = {params: {client: 'web'}};
+                    return $http.get('/api/min/submissions/' + $stateParams.subid, opt).then(function (res) {
+                        return res.data;
                     });
                   }
                 },

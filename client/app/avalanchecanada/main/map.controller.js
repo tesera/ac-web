@@ -71,7 +71,10 @@ angular.module('avalancheCanadaApp')
         }
 
         if($state.current.data && $state.current.data.isShare) {
-            $scope.current.ob = obs[0];
+            $timeout(function () {
+                $scope.current.report = obs;
+                $scope.drawer.left.visible = true;
+            }, 500);
         } else {
             $scope.obs = obs;
         }
@@ -86,7 +89,7 @@ angular.module('avalancheCanadaApp')
         });
 
         $scope.$watch('current.report', function(newValue, oldValue){
-            if(newValue && newValue !== oldValue) {
+            if(newValue && newValue.latlng) {
                 $scope.drawer.left.visible = true;
             } else {
                 $scope.drawer.left.visible = false;

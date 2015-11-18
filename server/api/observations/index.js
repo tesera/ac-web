@@ -166,7 +166,7 @@ router.get('/observations/:obid.:format?', function (req, res) {
 
                 res.render('observations/ob', locals);
             } else {
-                ob.thumbs = ob.uploads.map(function (key) { return 'http://'+req.get('host')+'/api/min/uploads/'+key; });
+                ob.thumbs = (ob.uploads)?ob.uploads.map(function (key) { return 'http://'+req.get('host')+'/api/min/uploads/'+key; }):[];
                 res.json(ob);
             }
         }
