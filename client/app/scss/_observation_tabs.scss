@@ -1,0 +1,99 @@
+.observation-tabs {
+    ul {
+        border-bottom: 2px solid #AAACAD;
+        margin-bottom: 10px;
+    }
+
+    li {
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: -2px;
+        cursor: pointer;
+
+        &.completed {
+            a, a:hover {
+                border-bottom-color: #0056B7;
+                background-color: #ffffff;
+                color: #0056B7;
+            }
+
+            a:hover {
+                background-color: #eeeeee;
+            }
+        }
+
+        &.active {
+            a, a:hover, a:focus {
+                border-bottom-color: #0056B7;
+                background-color: #0056B7;
+                color: #ffffff;
+            }
+        }
+
+        &.disabled {
+            a, a:hover {
+                border-bottom-color: #AAACAD;
+                background-color: #ffffff;
+                color: #AAACAD;
+            }
+        }
+
+        a {
+            border-radius: 0;
+            color: #55595C;
+            padding: 10px 7px;
+            width: 88px;
+            text-align: center;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            border-bottom: 5px solid #55595C;
+            font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
+        }
+    }
+
+    @media screen and (max-width: $screen-tablet) {
+        li {
+            font-size: 10px;
+            a {
+                width: auto;
+                padding-left: 3px;
+                padding-right: 3px;
+            }
+        }
+    }
+
+
+    .tab-head {
+        text-transform: uppercase;
+    }
+}
+
+.observation-information {
+    margin-bottom: 5px;
+
+    .observation-item{
+        i.fa-check{
+            margin-left: 10px;
+            margin-right: 1px;
+            color: $main-gray--80;
+        }
+        span.value{
+            color: $main-gray--80;
+            font-size: 0.8em;
+            font-weight: bolder;
+            font-family: Monserat, Helvetica Neue, Helvetica, Arial, sans-serif;
+            text-transform: uppercase;
+        }
+        ul {
+            display: inline;
+            list-style: none;
+            padding-left:5px;
+            font-size: 1em;
+            color: $main-gray--80;
+            li{
+                display:inline;
+            }
+        }
+    }
+}

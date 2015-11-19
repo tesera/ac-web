@@ -239,7 +239,6 @@ angular.module('avalancheCanadaApp', [
             var query =  '[[:d = at(document.type, "highlight")]';
                 query += '[:d = date.before(my.highlight.start_date,"'+tomorrow+'")]';
                 query += '[:d = date.after(my.highlight.end_date,"'+yesterday+'")]]';
-            $log.debug(query);
             ctx.api.form('everything').query(query)
                     .ref(ctx.ref).submit(function(err, documents){
                 if (err) {
