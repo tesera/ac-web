@@ -50,10 +50,7 @@ angular.module('avalancheCanadaApp')
             regionsVisible: true,
             expandedDate: false,
             dateFilters :  acConfig.dateFilters,
-            minFilters : displayedMinFilters.concat(acConfig.minFilters),
-            toggleForecast: toggleForecast,
-            goToSubmitReport: goToSubmitReport,
-            toggleDateFilters: toggleDateFilters
+            minFilters : displayedMinFilters.concat(acConfig.minFilters)
         });
 
         if($state.current.data && $state.current.data.isLogin) {
@@ -138,7 +135,7 @@ angular.module('avalancheCanadaApp')
                         var i = $scope.dateFilters.indexOf(filterValue);
                         $scope.dateFilters.splice(i, 1);
                         $scope.dateFilters.unshift(filterValue);
-                        toggleDateFilters();
+                        $scope.toggleDateFilters();
                     }, 0);
                 }
 
@@ -156,16 +153,27 @@ angular.module('avalancheCanadaApp')
             }
         };
 
-        function goToSubmitReport(){
+        $scope.goToSubmitReport = function(){
             $location.path('/submit');
-        }
+        };
 
-        function toggleForecast(){
+        $scope.toggleForecast = function (){
             $scope.drawer.right.enabled = !$scope.drawer.right.enabled;
             $scope.regionsVisible = !$scope.regionsVisible;
-        }
+        };
 
         function toggleMinFilters(filterValue){
+
+            function cleanMinFilters(){
+                displayedMinFilters = [];
+                $scope.filters.minFilters = [];
+            }
+
+            function setAllMinFilters(){
+                displayedMinFilters = ['all min'];
+                $scope.filters.minFilters = acConfig.minFilters;
+            }
+
             var previousMinFilter = displayedMinFilters[0];
 
             if( previousMinFilter === 'all min'){
@@ -187,19 +195,9 @@ angular.module('avalancheCanadaApp')
                 }
                 displayedMinFilters = $scope.filters.minFilters;
             }
-
-            function cleanMinFilters(){
-                displayedMinFilters = [];
-                $scope.filters.minFilters = [];
-            }
-
-            function setAllMinFilters(){
-                displayedMinFilters = ['all min'];
-                $scope.filters.minFilters = acConfig.minFilters;
-            }
         }
 
-        function toggleDateFilters(){
+        $scope.toggleDateFilters = function (){
             $scope.expandedDate = !$scope.expandedDate;
-        }
+        };
     });
