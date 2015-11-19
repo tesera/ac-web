@@ -16,6 +16,10 @@ module.exports = function (grunt) {
                 console.log('dev branch setting env to development');
                 env = 'development';
                 break;
+            case 'min':
+                console.log('min branch setting env to min');
+                env = 'min';
+                break;
             case 'qa':
                 console.log('qa branch setting env to qa');
                 env = 'qa';
