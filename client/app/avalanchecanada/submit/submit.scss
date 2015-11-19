@@ -1,7 +1,22 @@
 .min-form {
+
+    h2 {
+        font-size: 25px;
+
+        @media screen and (min-width: $screen-tablet) {
+            font-size: 30px;
+        }
+    }
+
     .required-info {
         background-color: #FFD740;
         padding: 0 7.5px;
+
+        label, .location-option {
+            color: #AAACAD;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
 
         .required-info-data {
             background-color: #FFFFFF;
@@ -13,10 +28,8 @@
                 margin-bottom: 7.5px;
             }
         }
-    }
 
-    .no-padding {
-        padding: 0;
+
     }
 
     .uploads {
@@ -38,6 +51,10 @@
         padding-right: 15px;
         padding-left: 15px;
         padding-bottom: 20px;
+
+        input[type=number] {
+            border: 1px solid #AAACAD;
+        }
 
         @media screen and (min-width: $screen-desktop) {
             border-left: 1px solid #f5f5f5;
@@ -137,6 +154,17 @@
         color: white;
     }
 
+    .btn-map {
+        border: 1px solid #245EAC;
+        background-color: #ffffff;
+        color: #245EAC;
+        font-size: 25px;
+        height: 40px;
+        width: 40px;
+        line-height: 38px;
+        text-align: center;
+    }
+
     .return-to-top {
         margin-top: 20px;
 
@@ -160,13 +188,91 @@
     .back-btn {
         float: left;
     }
+
+    .save-location {
+        width: 10%;
+        height: 34px;
+        background-color: #245EAC;
+        color: #ffffff;
+        text-align: center;
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 38px;
+
+        i {
+            font-size: 22px;
+        }
+
+        + .error {
+            margin-top: 5px;
+        }
+    }
+
+    .latlng {
+        width: 100%;
+        display: inline-block;
+
+        &.modified {
+            width: 90%;
+        }
+    }
+
+    .has-error .form-control {
+        border-color: #D82631;
+    }
+
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+        height: 34px;
+
+        span {
+            width: 100%;
+        }
+    }
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+
+    .uploads {
+        input[type=text] {
+            height: 33px;
+            padding-left: 5px;
+            border: 1px solid #AAACAD;
+        }
+    }
 }
 
+.no-padding {
+    padding: 0;
+}
+
+
 .submit-header {
+    padding-left: 7.5px;
+
     h1 {
         font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
         font-weight: bold;
-        font-size: 55px;
+        font-size: 30px;
+
+        @media screen and (min-width: $screen-desktop) {
+            font-size: 40px;
+        }
+
         margin: 0;
     }
 
@@ -188,12 +294,16 @@
 
     .modal-body {
         height: 100%;
+        padding: 0;
     }
 
     .save-button {
         position: absolute;
         right: 0;
         z-index: 9999;
+        border-radius: 0;
+        background-color: #0056b7;
+        color: white;
     }
 }
 
