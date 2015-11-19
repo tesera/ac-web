@@ -23,7 +23,7 @@
         }
 
         &.active {
-            a, a:hover {
+            a, a:hover, a:focus {
                 border-bottom-color: #0056B7;
                 background-color: #0056B7;
                 color: #ffffff;
