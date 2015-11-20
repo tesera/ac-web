@@ -212,6 +212,8 @@
         }
     }
     .ac-submit-report-tab{
+        background-color: $error-red!important;
+        margin-bottom: 50px!important;
         i{
             padding-left: 14px;
             padding-top: 9px;
@@ -221,7 +223,7 @@
             position: absolute;
             top: 4px;
             left: 6px;
-            background-color: $main-blue;
+            background-color: $error-red;
             padding: 3px;
             border-radius: 50%;
         }
