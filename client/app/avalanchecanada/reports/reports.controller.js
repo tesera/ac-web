@@ -3,7 +3,6 @@
 angular.module('avalancheCanadaApp')
     .controller('ReportsCtrl', function ($scope, Prismic, report) {
         $scope.report = report;
-        $scope.fullpage = true;
 
         Prismic.ctx().then(function(ctx){
 
