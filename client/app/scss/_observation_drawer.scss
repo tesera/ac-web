@@ -3,7 +3,7 @@
         font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
     }
 
-    .full-page-link{
+    .full-page-link, .print-link{
         cursor:pointer;
     }
 
@@ -66,7 +66,15 @@
 }
 
 .ac-observation-fullpage{
-    .full-page-link, .close-drawer{
+    .close-drawer{
         display: none;
+    }
+}
+
+@media print {
+    .ac-observation-fullpage{
+        .close-drawer, .print-link, a#back-link, a.pull-right, .share-report{
+            display: none!important;
+        }
     }
 }
