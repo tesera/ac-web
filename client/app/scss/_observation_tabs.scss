@@ -96,3 +96,13 @@
         }
     }
 }
+
+
+.observation-title{
+    max-width: 400px;
+    border-bottom: 3px solid $main-blue;
+    color: $main-blue;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-bottom: 5px;
+}

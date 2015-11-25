@@ -1,7 +1,7 @@
-#forecast
+#forecast.ac-observation-fullpage
     #inner-forecast
-        a#back-link(ui-sref='ac.map')
+        a#back-link(ng-href="{{report.shareUrl}}")
             i.fa.fa-chevron-left
 
         article.container
-            div(ac-observation-min='ac-observation-fullpage', observation='report', sponsor='sponsor')
+            div(ac-min-report-full-page, report='report', sponsor='sponsor')
