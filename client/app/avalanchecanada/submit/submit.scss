@@ -1,5 +1,11 @@
 .min-form {
 
+    .observation-tabs {
+        ul {
+            border-bottom: 2px solid $main-gray--40;
+        }
+    }
+
     h2 {
         font-size: 25px;
 
@@ -96,6 +102,10 @@
 
             .field-title, .radio, .checkbox, .number, .datetime-input, .textarea {
                 padding-left: 0;
+                padding-right: 0;
+                @media screen and (min-width: $screen-tablet) {
+                    padding-right: 15px;
+                }
             }
         }
 
@@ -178,7 +188,7 @@
     }
 
     .tab-text {
-        background-color: $main-gray--10;
+        color: $main-gray--40;
     }
 
     .submit-btn {
