@@ -1,5 +1,11 @@
 .min-form {
 
+    .observation-tabs {
+        ul {
+            border-bottom: 2px solid $main-gray--40;
+        }
+    }
+
     h2 {
         font-size: 25px;
 
