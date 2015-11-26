@@ -51,6 +51,14 @@
         }
     }
 
+    .nav-justified {
+        li a{
+            width: auto;
+            margin-right:2px;
+            padding: 10px 10px;
+        }
+    }
+
     @media screen and (max-width: $screen-tablet) {
         li {
             font-size: 10px;
