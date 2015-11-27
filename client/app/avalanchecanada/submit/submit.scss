@@ -58,7 +58,7 @@
         padding-left: 15px;
         padding-bottom: 20px;
 
-        input[type=number] {
+        input[type=number], input[type=text], input[type=datetime] {
             border: 1px solid $main-gray--40;
         }
 
@@ -100,7 +100,7 @@
                 padding: 0;
             }
 
-            .field-title, .radio, .checkbox, .number, .datetime-input, .textarea {
+            .field-title, .radio, .checkbox, .number, .datetime-input, .textarea, .text {
                 padding-left: 0;
                 padding-right: 0;
                 @media screen and (min-width: $screen-tablet) {
@@ -109,7 +109,7 @@
             }
         }
 
-        .number, .datetime-input {
+        .number, .datetime-input, .text {
             label {
                 width: 100%;
             }
