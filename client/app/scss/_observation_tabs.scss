@@ -51,6 +51,35 @@
         }
     }
 
+    &.bottom {
+        margin-top: 10px;
+
+        li {
+            &.completed {
+                a, a:hover {
+                    border-top-color: #0056B7;
+                }
+            }
+
+            &.active {
+                a, a:hover, a:focus {
+                    border-top-color: $main-blue;
+                }
+            }
+
+            &.disabled {
+                a, a:hover {
+                    border-top-color: $main-gray--40;
+                }
+            }
+
+            a {
+                border-top: 5px solid $main-gray--80;
+                border-bottom: none;
+            }
+        }
+    }
+
     .nav-justified {
         li a{
             width: auto;

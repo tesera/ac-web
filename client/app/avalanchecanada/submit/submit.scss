@@ -285,6 +285,10 @@
             border: 1px solid $main-gray--40;
         }
     }
+
+    .footer-buttons {
+        margin-top: 15px;
+    }
 }
 
 .no-padding {
@@ -296,14 +300,6 @@
     padding-left: 7.5px;
 
     h2 {
-//        font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
-//        font-weight: bold;
-//        font-size: 30px;
-//
-//        @media screen and (min-width: $screen-desktop) {
-//            font-size: 40px;
-//        }
-
         margin: 0;
     }
 
