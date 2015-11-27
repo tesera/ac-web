@@ -31,11 +31,8 @@ angular.module('avalancheCanadaApp')
                 templateUrl: 'app/avalanchecanada/main/map.html',
                 controller: 'MapCtrl',
                 resolve: {
-                  obs: function ($stateParams, $http) {
-                    var opt = {params: {client: 'web'}};
-                    return $http.get('/api/min/submissions/' + $stateParams.subid, opt).then(function (res) {
-                        return res.data;
-                    });
+                  obs: function (acSubmission, $stateParams) {
+                   return acSubmission.getOne($stateParams.subid);
                   }
                 },
                 data: {
@@ -67,11 +64,8 @@ angular.module('avalancheCanadaApp')
                 templateUrl: 'app/avalanchecanada/reports/reportsFullPage.html',
                 controller: 'ReportsCtrl',
                 resolve: {
-                    report: function ($stateParams, $http) {
-                        var opt = {params: {client: 'web'}};
-                        return $http.get('/api/min/submissions/' + $stateParams.subid, opt).then(function (res) {
-                            return res.data;
-                        });
+                    report: function (acSubmission, $stateParams) {
+                        return acSubmission.getOne($stateParams.subid);
                     }
                 }
             });

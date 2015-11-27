@@ -1,18 +1,49 @@
-.min-form {
-
-    .observation-tabs {
-        ul {
-            border-bottom: 2px solid $main-gray--40;
-        }
-    }
-
+.form-submission {
     h2 {
-        font-size: 25px;
+        font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-weight: bold;
+        font-size: 50px;
+        line-height: 52px;
 
-        @media screen and (min-width: $screen-tablet) {
-            font-size: 30px;
+        @media screen and (max-width:$screen-phone) {
+            font-size: 36px;
+            line-height: 38px;
         }
     }
+
+    h1 {
+        font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-weight: bold;
+        font-size: 26px;
+        line-height: 28px;
+    }
+
+    h3 {
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-weight: bold;
+        font-size: 26px;
+        line-height: 30px;
+    }
+
+    h4 {
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .btn-styled {
+        font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-variant: small-caps;
+        text-transform: lowercase;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 23px;
+        padding-top: 2px;
+    }
+}
+
+.min-form {
 
     .required-info {
         background-color: $report-required-info;
@@ -34,8 +65,6 @@
                 margin-bottom: 7.5px;
             }
         }
-
-
     }
 
     .uploads {
@@ -58,7 +87,7 @@
         padding-left: 15px;
         padding-bottom: 20px;
 
-        input[type=number] {
+        input[type=number], input[type=text], input[type=datetime] {
             border: 1px solid $main-gray--40;
         }
 
@@ -100,7 +129,7 @@
                 padding: 0;
             }
 
-            .field-title, .radio, .checkbox, .number, .datetime-input, .textarea {
+            .field-title, .radio, .checkbox, .number, .datetime-input, .textarea, .text {
                 padding-left: 0;
                 padding-right: 0;
                 @media screen and (min-width: $screen-tablet) {
@@ -109,7 +138,7 @@
             }
         }
 
-        .number, .datetime-input {
+        .number, .datetime-input, .text {
             label {
                 width: 100%;
             }
@@ -139,15 +168,7 @@
 
     .help-text {
         padding: 0;
-
-        @media screen and (min-width: $screen-desktop) {
-            border-left: 4px solid $main-gray--40;
-            padding: 10px;
-        }
-
         color: $main-gray--40;
-        height: 100%;
-
         i {
             margin-right: 5px;
         }
@@ -264,6 +285,10 @@
             border: 1px solid $main-gray--40;
         }
     }
+
+    .footer-buttons {
+        margin-top: 15px;
+    }
 }
 
 .no-padding {
@@ -274,15 +299,7 @@
 .submit-header {
     padding-left: 7.5px;
 
-    h1 {
-        font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
-        font-weight: bold;
-        font-size: 30px;
-
-        @media screen and (min-width: $screen-desktop) {
-            font-size: 40px;
-        }
-
+    h2 {
         margin: 0;
     }
 
