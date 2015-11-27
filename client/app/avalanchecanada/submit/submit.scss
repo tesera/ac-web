@@ -139,15 +139,7 @@
 
     .help-text {
         padding: 0;
-
-        @media screen and (min-width: $screen-desktop) {
-            border-left: 4px solid $main-gray--40;
-            padding: 10px;
-        }
-
         color: $main-gray--40;
-        height: 100%;
-
         i {
             margin-right: 5px;
         }
