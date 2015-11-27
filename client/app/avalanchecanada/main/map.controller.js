@@ -132,11 +132,12 @@ angular.module('avalancheCanadaApp')
                     });
 
                     $timeout(function () {
-                        var i = $scope.dateFilters.indexOf(filterValue);
-                        $scope.dateFilters.splice(i, 1);
-                        $scope.dateFilters.unshift(filterValue);
+                        //keep behaviour as on MIN Filters
+                        //var i = $scope.dateFilters.indexOf(filterValue);
+                        //$scope.dateFilters.splice(i, 1);
+                        //$scope.dateFilters.unshift(filterValue);
                         $scope.toggleDateFilters();
-                    }, 0);
+                    }, 300);
                 }
 
                 if (filterType === 'minFilter' && $scope.filters[filterType] !== filterValue){
