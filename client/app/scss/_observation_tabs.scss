@@ -99,6 +99,19 @@
         }
     }
 
+    @media screen and (min-width: $screen-tablet) and (max-width: $screen-lg-desktop) {
+        .nav-justified {
+            li {
+                font-size: 10px;
+                a {
+                    width: auto;
+                    padding-left: 3px;
+                    padding-right: 3px;
+                }
+            }
+        }
+    }
+
 
     .tab-head {
         text-transform: uppercase;
