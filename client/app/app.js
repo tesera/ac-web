@@ -165,6 +165,23 @@ angular.module('avalancheCanadaApp', [
         $httpProvider.interceptors.push('jwtInterceptor');
     })
 
+    //client=web to all requests
+    .config(function($httpProvider) {
+        $httpProvider.interceptors.push(function () {
+            return {
+                'request': function (config) {
+                    var reqUrl = config.url;
+
+                    if(config.method === 'GET' && (reqUrl.indexOf('submissions') != -1 || reqUrl.indexOf('observations') != -1 )){
+                        config.url = config.url + '?client=web';
+                    }
+                    return config;
+                }
+
+            }
+        });
+    })
+
     .factory('urlBuilder', function ($state) {
         return {
             get: function () {

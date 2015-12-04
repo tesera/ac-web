@@ -20,7 +20,7 @@
     "multilevelpushmenu": "~2.1.4",
     "mapbox.js": "~2.2.3",
     "Leaflet.label": "~0.2.1",
-    "ac-components": "https://github.com/bogdanthindev/ac-components.git#min",
+    "ac-components": "https://github.com/tesera/ac-components.git#min",
     "prismic.io": "~1.0.22",
     "angular-prismicio": "awulder/angular-prismicio#master",
     "a0-angular-storage": "~0.0.9",
