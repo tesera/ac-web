@@ -172,13 +172,13 @@ angular.module('avalancheCanadaApp', [
                 'request': function (config) {
                     var reqUrl = config.url;
 
-                    if(config.method === 'GET' && (reqUrl.indexOf('submissions') != -1 || reqUrl.indexOf('observations') != -1 )){
+                    if(config.method === 'GET' && (reqUrl.indexOf('submissions') !== -1 || reqUrl.indexOf('observations') !== -1 )){
                         config.url = config.url + '?client=web';
                     }
                     return config;
                 }
 
-            }
+            };
         });
     })
 
