@@ -264,8 +264,7 @@ module.exports = function (grunt) {
           '/json3/',
           '/es5-shim/',
           /bootstrap.css/,
-          /font-awesome.css/,
-          /auth0-lock/
+          /font-awesome.css/
         ]
       }
     },
@@ -302,7 +301,6 @@ module.exports = function (grunt) {
       css: ['<%= yeoman.dist %>/public/{,*/}*.css'],
       js: [
         '<%= yeoman.dist %>/public/{,*/}*.js',
-        '!<%= yeoman.dist %>/public/bower_components/auth0.js',
         '!<%= yeoman.dist %>/public/bower_components/mapbox.js'
       ],
       options: {
