@@ -13,31 +13,26 @@
             a, a:hover {
                 border-bottom-color: #0056B7;
                 background-color: #ffffff;
-                color: #0056B7;
+                color: #000000;
 
                 &.avalanche {
                     border-bottom-color: $report-avalanche;
-                    color: $report-avalanche;
                 }
 
                 &.weather {
                     border-bottom-color: $report-weather;
-                    color: $report-weather;
                 }
 
                 &.snowpack {
                     border-bottom-color: $report-snowpack;
-                    color: $report-snowpack;
                 }
 
                 &.incident {
                     border-bottom-color: $report-incident;
-                    color: $report-incident;
                 }
 
                 &.quick {
                     border-bottom-color: $report-quick;
-                    color: $report-quick;
                 }
             }
 
@@ -185,7 +180,7 @@
             color: #AAACAD;
         }
         span.value{
-            color: #000000; ;
+            color: #000000; //$main-gray--80;
             //font-size: 0.8em;
             font-weight: 500;
             font-family: Monserat, Helvetica Neue, Helvetica, Arial, sans-serif;
