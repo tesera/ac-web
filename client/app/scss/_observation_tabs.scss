@@ -17,22 +17,27 @@
 
                 &.avalanche {
                     border-bottom-color: $report-avalanche;
+                    color: $report-avalanche;
                 }
 
                 &.weather {
                     border-bottom-color: $report-weather;
+                    color: $report-weather;
                 }
 
                 &.snowpack {
                     border-bottom-color: $report-snowpack;
+                    color: $report-snowpack;
                 }
 
                 &.incident {
                     border-bottom-color: $report-incident;
+                    color: $report-incident;
                 }
 
                 &.quick {
                     border-bottom-color: $report-quick;
+                    color: $report-quick;
                 }
             }
 
@@ -50,26 +55,31 @@
                 &.avalanche {
                     background-color: $report-avalanche;
                     border-bottom-color: $report-avalanche;
+                    color: $white;
                 }
 
                 &.weather {
                     background-color: $report-weather;
                     border-bottom-color: $report-weather;
+                    color: $white;
                 }
 
                 &.snowpack {
                     background-color: $report-snowpack;
                     border-bottom-color: $report-snowpack;
+                    color: $white;
                 }
 
                 &.incident {
                     background-color: $report-incident;
                     border-bottom-color: $report-incident;
+                    color: $white;
                 }
 
                 &.quick {
                     background-color: $report-quick;
                     border-bottom-color: $report-quick;
+                    color: $white;
                 }
             }
         }
@@ -84,14 +94,14 @@
 
         a {
             border-radius: 0;
-            color: #55595C;
+            color: #AAACAD;
             padding: 10px 7px;
             width: 88px;
             text-align: center;
             box-sizing: border-box;
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box;
-            border-bottom: 5px solid $main-gray--80;
+            border-bottom: 5px solid #AAACAD;
             font-family: Monserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
         }
     }
@@ -119,7 +129,7 @@
             }
 
             a {
-                border-top: 5px solid $main-gray--80;
+                border-top: 5px solid #AAACAD;
                 border-bottom: none;
             }
         }
@@ -172,10 +182,10 @@
         i.fa-check{
             margin-left: 10px;
             margin-right: 1px;
-            color: $main-gray--80;
+            color: #AAACAD;
         }
         span.value{
-            color: #000000; //$main-gray--80;
+            color: #000000; ;
             //font-size: 0.8em;
             font-weight: 500;
             font-family: Monserat, Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -186,7 +196,7 @@
             list-style: none;
             padding-left:5px;
             font-size: 1em;
-            color: $main-gray--80;
+            color: #AAACAD;
             li{
                 display:inline;
             }
@@ -197,8 +207,8 @@
 
 .observation-title{
     max-width: 400px;
-    border-bottom: 3px solid $main-blue;
-    color: $main-blue;
+    border-bottom: 3px solid #000000; //$main-blue;
+    color: #000000; //$main-blue;
     text-transform: uppercase;
     font-weight: bold;
     padding-bottom: 5px;
