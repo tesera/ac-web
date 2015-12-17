@@ -8,7 +8,6 @@
         font-weight: bold;
         margin-bottom: -2px;
         cursor: pointer;
-        width: 20%;
 
         &.completed {
             a, a:hover {
@@ -90,7 +89,7 @@
 
         a {
             border-radius: 0;
-            color: #AAACAD;
+            color: #000000;
             padding: 10px 7px;
             width: 88px;
             text-align: center;
