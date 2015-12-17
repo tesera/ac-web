@@ -52,7 +52,7 @@ angular.module('avalancheCanadaApp')
             dateFilters :  acConfig.dateFilters,
             minFilters : _.sortBy(displayedMinFilters.concat(acConfig.minFilters), function(val) { return ['all min', 'quick', 'avalanche', 'snowpack', 'weather', 'incident'].indexOf(val); })
         });
-        
+
         if($state.current.data && $state.current.data.isLogin) {
             if(!auth.isAuthenticated) {
                 auth.signin({authParams: {scope: 'openid profile'}});
