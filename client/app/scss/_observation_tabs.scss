@@ -14,6 +14,26 @@
                 border-bottom-color: #0056B7;
                 background-color: #ffffff;
                 color: #0056B7;
+
+                &.avalanche {
+                    border-bottom-color: $report-avalanche;
+                }
+
+                &.weather {
+                    border-bottom-color: $report-weather;
+                }
+
+                &.snowpack {
+                    border-bottom-color: $report-snowpack;
+                }
+
+                &.incident {
+                    border-bottom-color: $report-incident;
+                }
+
+                &.quick {
+                    border-bottom-color: $report-quick;
+                }
             }
 
             a:hover {
@@ -26,6 +46,31 @@
                 border-bottom-color: $main-blue;
                 background-color: $main-blue;
                 color: $white;
+            
+                &.avalanche {
+                    background-color: $report-avalanche;
+                    border-bottom-color: $report-avalanche;
+                }
+
+                &.weather {
+                    background-color: $report-weather;
+                    border-bottom-color: $report-weather;
+                }
+
+                &.snowpack {
+                    background-color: $report-snowpack;
+                    border-bottom-color: $report-snowpack;
+                }
+
+                &.incident {
+                    background-color: $report-incident;
+                    border-bottom-color: $report-incident;
+                }
+
+                &.quick {
+                    background-color: $report-quick;
+                    border-bottom-color: $report-quick;
+                }
             }
         }
 
