@@ -39,6 +39,16 @@ angular.module('avalancheCanadaApp')
                   isShare: true
                 }
             })
+            .state('ac.focus', {
+                url: '^/focus/:markerid',
+                templateUrl: 'app/avalanchecanada/main/map.html',
+                controller: 'MapCtrl',
+                resolve: {
+                    obs: function (acObservation) {
+                        return acObservation.byPeriod('7:days');
+                    }
+                }
+            })
             .state('ac.sled', {
                 url: '^/sled',
                 templateUrl: 'app/avalanchecanada/main/more.html',

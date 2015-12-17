@@ -77,6 +77,7 @@ function mapWebObsResponse(obs, req){
     return _.reduce(obs, function(results, ob, key){
 
         results[key] = ob;
+        results[key].focusUrl= 'http://'+req.get('host')+'/focus/'+ ob.obid;
         results[key].shareUrl= 'http://'+req.get('host')+'/share/'+ changeCase.paramCase(ob.title) + '/' + ob.obid;
         results[key].thumbs = ob.uploads.map(function (key) { return 'http://'+req.get('host')+'/api/min/uploads/'+key});
         results[key].dateFormatted = formatDate(ob.datetime);
@@ -89,6 +90,7 @@ function mapWebSubResponse(subs, req){
     return _.reduce(subs, function(results, sub){
 
         results = sub;
+        results.focusUrl= 'http://'+req.get('host')+'/focus/'+ sub.subid;
         results.shareUrl= 'http://'+req.get('host')+'/share/'+ changeCase.paramCase(sub.title) + '/' + sub.subid;
         results.thumbs = sub.uploads.map(function (key) { return 'http://'+req.get('host')+'/api/min/uploads/'+key});
         results.dateFormatted = formatDate(sub.datetime);
