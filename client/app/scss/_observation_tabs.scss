@@ -107,13 +107,49 @@
         li {
             &.completed {
                 a, a:hover {
-                    border-top-color: #0056B7;
+                    &.avalanche {
+                        border-top-color: $report-avalanche;
+                    }
+
+                    &.weather {
+                        border-top-color: $report-weather;
+                    }
+
+                    &.snowpack {
+                        border-top-color: $report-snowpack;
+                    }
+
+                    &.incident {
+                        border-top-color: $report-incident;
+                    }
+
+                    &.quick {
+                        border-top-color: $report-quick;
+                    }
                 }
             }
 
             &.active {
                 a, a:hover, a:focus {
-                    border-top-color: $main-blue;
+                    &.avalanche {
+                        border-top-color: $report-avalanche;
+                    }
+
+                    &.weather {
+                        border-top-color: $report-weather;
+                    }
+
+                    &.snowpack {
+                        border-top-color: $report-snowpack;
+                    }
+
+                    &.incident {
+                        border-top-color: $report-incident;
+                    }
+
+                    &.quick {
+                        border-top-color: $report-quick;
+                    }
                 }
             }
 

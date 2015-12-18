@@ -19,7 +19,8 @@ angular.module('avalancheCanadaApp', [
         'angular-storage',
         'auth0',
         'angular-jwt',
-        'datatables'
+        'datatables',
+        'LocalStorageModule'
     ])
 
     // main module configuration

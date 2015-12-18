@@ -24,7 +24,8 @@
     "prismic.io": "~1.0.22",
     "angular-prismicio": "awulder/angular-prismicio#master",
     "slideout": "https://github.com/Mango/slideout.git#~0.1.5",
-    "angular-datatables": "~0.4.3"
+    "angular-datatables": "~0.4.3",
+    "angular-local-storage": "~0.2.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.8",
