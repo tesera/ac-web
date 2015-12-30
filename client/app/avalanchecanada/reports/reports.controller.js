@@ -27,6 +27,11 @@ angular.module('avalancheCanadaApp')
                 $scope.disclaimer = doc;
             });
 
+            //set the proper height of the window container. this can't be 100% without properly
+            //restructuring the dom.
+            angular.element(document).ready(function () {
+                jQuery('#inner-forecast').css('min-height', jQuery(window).height() + 'px');
+            });
         });
 
 

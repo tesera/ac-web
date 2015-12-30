@@ -55,4 +55,6 @@
     top: 75%;
     left: 50%;
     transform: translate(-30%, -50%);
+    /* hide the loader for now */
+    display: none !important;
 }
